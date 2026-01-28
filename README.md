@@ -61,7 +61,7 @@ When a user logs in, the website provides several essential functions:
   ![UseCAse](./assets/usecase.png)
 ---
 ## Add to cart 
-![Flowchart](./assets/flowchart.png)
+![Flowchart](./assets/flowCart.png)
 
 ---
 ## Sequence Diagram - Add to cart
