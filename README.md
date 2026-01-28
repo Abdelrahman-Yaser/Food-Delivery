@@ -60,7 +60,57 @@ When a user logs in, the website provides several essential functions:
 
   ![UseCAse](./assets/usecase.png)
 ---
+## Add to cart 
+![Flowchart](./assets/flowchart.png)
 
+---
+## PseudoCode
+Add to cart
+```javascript
+FUNCTION addToCart (items)
+    TRY
+        AWAIT result FROM Database.push(items)
+        RETURN result
+    CATCH error
+        LOG error.message
+        THROW "Custom Error Message"
+    ENDTRY
+ENDFUNCTION
+```
+Modify Cart
+```javascript
+FUNCTION updateToCart (items)
+    START TRANSACTION
+    TRY
+        /
+        SET stock = AWAIT Database.checkStock(items)
+        IF stock < items.quantity THEN THROW "Out of Stock"
+
+        /
+        SET result = AWAIT Database.timelineUpdate(items)
+        
+        COMMIT TRANSACTION 
+        RETURN result
+    CATCH error
+        ROLLBACK TRANSACTION 
+        LOG error.message
+        THROW "Update Failed"
+    ENDTRY
+ENDFUNCTION
+```
+Delete cart
+```javascript
+FUNCTION deleteItem(item)
+    TRY
+        // Ensure atomic deletion
+        SET result = AWAIT Database.delete(item)
+        RETURN result
+    CATCH error
+        LOG error.message
+        THROW createError('Failed to delete item', 500, 'DELETE_FAILED')
+    ENDTRY
+ENDFUNCTION
+```
 ## Analytical Notes
 
 - Talabat is **divided into multiple projects**, making management and updates easier without affecting the entire system.  
