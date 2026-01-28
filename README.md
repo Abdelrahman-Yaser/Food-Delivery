@@ -64,6 +64,9 @@ When a user logs in, the website provides several essential functions:
 ![Flowchart](./assets/flowchart.png)
 
 ---
+## Sequence Diagram - Add to cart
+![Sequnce Diagram](./assets/SequnceDiagram.png)
+---
 ## PseudoCode
 Add to cart
 ```javascript
